@@ -12,6 +12,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
@@ -33,7 +34,7 @@ public class Hooks
 
 
     @Before
-    public void before() throws MalformedURLException {
+    public void before() throws IOException {
 
         driver = initializeDriver();
         context.driver = driver;

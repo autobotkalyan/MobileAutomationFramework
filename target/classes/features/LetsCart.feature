@@ -4,15 +4,15 @@ Feature: To test Lets Cart Native application
 
   @BaseFlow
   Scenario Outline: Testing Base page of the application
-    When I select <Country> country from the dropdown
-    And I enter <Name> in the text field
+    When I select country from the dropdown for <TestCase>
+    And I enter Name in the text field
     And I click lets shop button
 #    Then I am on Products screen
 #    And I quit the application
 
     Examples:
-      | Country | Name  |
-      | Belgium | KK    |
+      | TestCase |  |
+      | TC001    |  |
 #      | India   | Kumar |
 
   @Checkout
