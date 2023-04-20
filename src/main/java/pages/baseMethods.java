@@ -39,7 +39,7 @@ public class baseMethods
 
     public static String readXL(String testCase, String field) throws FilloException {
         Fillo fillo=new Fillo();
-        Connection connection=fillo.getConnection("src/main/resources/iOSAutomation.TestData/MobileTestData.xlsx");
+        Connection connection=fillo.getConnection("src/main/resources/TestData/MobileTestData.xlsx");
         String strQuery="Select * from testdata where TestCase='"+testCase+"'";
         Recordset recordset=connection.executeQuery(strQuery);
 

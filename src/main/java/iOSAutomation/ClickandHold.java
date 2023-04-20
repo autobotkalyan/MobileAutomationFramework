@@ -5,11 +5,14 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebElement;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
-public class SliderConcept
+public class ClickandHold
 {
     public static void main(String[] args) throws MalformedURLException {
 
@@ -25,14 +28,15 @@ public class SliderConcept
 
         driver = new IOSDriver<WebElement>(new URL("http://0.0.0.0:4723/wd/hub"), dc);
 
-        driver.findElement(By.id("Sliders")).click();
+        driver.findElement(By.id("Steppers")).click();
 
-        WebElement sliderElement = driver.findElementByIosNsPredicate("value == \"42%\"");
-        sliderElement.sendKeys("0");
+        WebElement element = driver.findElementByIosClassChain("**/XCUIElementTypeButton[`label == \"Increment\"`][1]");
 
-        sliderElement = driver.findElementByIosNsPredicate("value == \"0%\"");
-        sliderElement.sendKeys("1");
+        Map<String, Object> params = new HashMap<>();
+        params.put("elementId", ((RemoteWebElement) element).getId());
+        params.put("duration", 2);
 
-        //Gestures
+        driver.executeScript("mobile: touchAndHold", params);
+
     }
 }

@@ -3,6 +3,7 @@ package stepDefinition;
 import context.TestContext;
 import factory.DriverFactory;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -18,12 +19,15 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-import static factory.DriverFactory.initializeDriver;
+import static factory.DriverFactory.*;
+import static pages.baseMethods.getDataProperties;
 
 public class Hooks
 {
 
-    private AndroidDriver<WebElement> driver;
+//    private AndroidDriver<WebElement> driver;
+//
+//    private IOSDriver<WebElement> driver;
 
     private final TestContext context;
 
@@ -32,20 +36,32 @@ public class Hooks
         this.context = context;
     }
 
+    String path = "src/main/resources/TestData/Runner.properties";
+
 
     @Before
     public void before() throws IOException {
 
-        driver = initializeDriver();
-        context.driver = driver;
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        if(getDataProperties(path,"DeviceType").equalsIgnoreCase("iOS"))
+        {
+            IOSDriver<WebElement> driver = IOSinitializeDriver();
+            context.driver1 = driver;
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        }
+        else
+        {
+            AndroidDriver<WebElement> driver = AndroidinitializeDriver();
+            context.driver = driver;
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        }
+
     }
 
-    @After
-    public void after()
-    {
-        driver.quit();
-    }
+//    @After
+//    public void after()
+//    {
+//        driver.quit();
+//    }
 
 
 }
